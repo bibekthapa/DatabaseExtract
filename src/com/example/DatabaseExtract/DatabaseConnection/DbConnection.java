@@ -28,15 +28,21 @@ public class DbConnection {
                 conn=null;
             }
     }
-     public PreparedStatement init() throws SQLException
-     {
-         stmt=(PreparedStatement) conn.createStatement();
+     public PreparedStatement init(String sql) throws SQLException
+     { 
+         stmt=(PreparedStatement) conn.prepareStatement(sql);
          return stmt;
      }
-     public ResultSet execute(String query) throws SQLException
+     public ResultSet executeQuery() throws SQLException
      {
-          return stmt.executeQuery(query);
+          return stmt.executeQuery();
      }
+     
+     public int executeUpdate() throws SQLException
+     {
+         return stmt.executeUpdate();
+     }
+     
     
     
     

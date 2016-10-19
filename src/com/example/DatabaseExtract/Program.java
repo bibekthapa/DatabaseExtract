@@ -20,7 +20,7 @@ public class Program {
 
             conn = DriverManager.getConnection(DBconstant.DB_URL, DBconstant.DB_Username, DBconstant.DB_Password);
             System.out.println("Database is connected");
-          //  viewTable(conn);
+            viewTable(conn);
             insertTable(conn);
 
             conn.close();
@@ -57,20 +57,23 @@ public class Program {
             {
                 Scanner reader = new Scanner(System.in);
             //stmt=null;
+                System.out.println("Enter the id ");
            
+           int id =reader.nextInt();
            System.out.println("Enter the client name");
            String clientName=reader.nextLine();
             System.out.println("Enter the client description \n");
            String clientDesc=reader.nextLine();
            // String query="Insert into project_management values(5,Benter,Sql programming)"+".clients";
-           String query = " insert into clients (client_name, client_description)"
-        + "values (?,?)";
+           String query = " insert into clients (client_id,client_name, client_description)"
+        + "values (?,?,?)";
  
            try
             {
                PreparedStatement  preparedStmt= conn.prepareStatement(query);
-                    preparedStmt.setString (1, clientName);
-                 preparedStmt.setString (2, clientDesc);
+                preparedStmt.setInt (1, id);
+                    preparedStmt.setString (2, clientName);
+                 preparedStmt.setString (3, clientDesc);
                
                preparedStmt.execute();
                 
